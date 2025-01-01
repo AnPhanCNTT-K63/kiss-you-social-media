@@ -1,0 +1,91 @@
+.appBar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #ff6f91;
+  box-shadow: none;
+}
+
+.logo {
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
+}
+
+.searchBox {
+  background-color: #ffe4e6;
+  border-radius: 8px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.searchIcon {
+  color: #ff3d68;
+}
+
+.searchInput {
+  margin-left: 8px;
+  flex: 1;
+  color: #ff3d68;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.iconContainerCenter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  margin-left: 170px;
+}
+
+.iconButton {
+  color: #ffffff;
+}
+
+.iconButton:hover {
+  color: #ff8ea0;
+}
+
+.avatar {
+  border: 2px solid #ffffff;
+}
+
+.avatar:hover {
+  border-color: #ff8ea0;
+}
+
+.menu {
+  margin-left: -30px;
+  margin-top: 5px;
+}
+
+.menuPaper {
+  width: 180px;
+  background-color: #ffe4e6;
+  color: #ff3d68;
+}
+.menuItem {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.menuItem:hover {
+  background-color: #ff8ea0;
+  color: #ff3d68;
+}

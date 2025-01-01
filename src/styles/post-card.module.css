@@ -1,0 +1,42 @@
+.card {
+  max-width: 600px;
+  margin: 20px auto;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  font-weight: bold;
+}
+
+.card-subheader {
+  color: gray;
+}
+
+.card-content {
+  margin-bottom: 8px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.card-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 8px;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.card-actions {
+  justify-content: space-between;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+}
+
+.action-text {
+  margin-left: 8px;
+}

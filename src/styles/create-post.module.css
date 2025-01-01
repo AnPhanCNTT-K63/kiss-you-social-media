@@ -1,0 +1,79 @@
+.card {
+  max-width: 600px;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cardContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+}
+
+.placeholder {
+  color: gray;
+  flex-grow: 1;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 16px;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
+
+.textField {
+  width: 100%;
+  margin: 16px 0;
+}
+
+.imagePreview {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.previewImage {
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+}
+
+.actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.uploadButton {
+  text-transform: none;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}

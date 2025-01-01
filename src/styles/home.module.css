@@ -1,0 +1,14 @@
+.onlineFriends {
+  flex: 3;
+}
+
+.onlineFriendsWrapper {
+  padding: 10px;
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .chatOnline {
+    flex: 1px;
+  }
+}
