@@ -1,10 +1,10 @@
-import PostList from "../../components/posts/PostList";
 import { io } from "socket.io-client";
 import { useState, useContext, useEffect, useRef } from "react";
 import UserContext from "../../UserContext";
 import styles from "../../styles/home.module.css";
 import OnlineFriends from "../../components/online-friends/OnlineFriendLs";
-import LeftBar from "../../components/left-bar/LeftBar";
+import Feed from "../../components/feed/Feed";
+import SideBar from "../../components/sidebar/SideBar";
 
 export default function Home() {
   const socket = useRef();
@@ -17,9 +17,6 @@ export default function Home() {
 
   useEffect(() => {
     if (!user) return;
-  });
-
-  useEffect(() => {
     socket.current.emit("addUser", user._id);
     socket.current.on("getUsers", (users) => {
       setOnlineUsers(users);
@@ -27,18 +24,16 @@ export default function Home() {
   }, [user]);
 
   return (
-    <>
-      <div>
-        <LeftBar />
+    <div className={styles.homePage}>
+      <div className={styles.leftSidebar}>
+        <SideBar />
       </div>
-      <div>
-        <PostList />
+      <div className={styles.middleContent}>
+        <Feed />
       </div>
-      <div>
-        <div>
-          <OnlineFriends onlineUsers={onlineUsers} currentId={user._id} />
-        </div>
+      <div className={styles.rightSidebar}>
+        <OnlineFriends onlineUsers={onlineUsers} currentId={user._id} />
       </div>
-    </>
+    </div>
   );
 }

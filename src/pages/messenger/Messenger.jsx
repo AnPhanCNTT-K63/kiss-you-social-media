@@ -26,6 +26,7 @@ export default function Messenger() {
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
+        createdAt: Date.now(),
       });
     });
   }, []);
