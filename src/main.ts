@@ -3,14 +3,11 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { TransformInterceptor } from './interceptors/transform.interceptor';
-import { Server } from 'http';
-import * as express from 'express';
-import { ExpressAdapter } from '@nestjs/platform-express';
-
-const server = express();
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
+  const app = await NestFactory.create(AppModule, {
+    cors: true,
+  });
 
   app.setGlobalPrefix('/api');
 
@@ -37,9 +34,6 @@ async function bootstrap() {
 
   app.useGlobalInterceptors(new TransformInterceptor());
 
-  await app.init();
+  await app.listen(process.env.PORT ?? 3000);
 }
-
 bootstrap();
-
-export default server;
