@@ -15,6 +15,7 @@ const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const constants_1 = require("../../../constants");
 const user_entity_1 = require("../../user/entities/user.entity");
+const file_entity_1 = require("../../media/entities/file.entity");
 const autopopulate_soft_delete_1 = require("../../../utils/mongoose-plugins/autopopulate-soft-delete");
 let Profile = class Profile {
 };
@@ -80,7 +81,7 @@ __decorate([
         type: mongoose_2.Types.ObjectId,
         required: false,
         ref: 'File',
-        refClass: File,
+        refClass: file_entity_1.File,
     }),
     __metadata("design:type", mongoose_2.Types.ObjectId)
 ], Profile.prototype, "coverPhoto", void 0);
@@ -89,7 +90,7 @@ __decorate([
         type: mongoose_2.Types.ObjectId,
         required: false,
         ref: 'File',
-        refClass: File,
+        refClass: file_entity_1.File,
     }),
     __metadata("design:type", mongoose_2.Types.ObjectId)
 ], Profile.prototype, "avatar", void 0);
