@@ -1,37 +1,33 @@
 import { SuperProp } from '@libs/super-core/decorators/super-prop.decorator';
 import { Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Types } from 'mongoose';
+import { Post } from 'src/apis/post/entities/post.entity';
 import { User } from 'src/apis/user/entities/user.entity';
 import { COLLECTION_NAMES } from 'src/constants';
-import { Conversation } from '../../conversation/entities/conversation';
+import { AggregateRoot } from 'src/entities/aggregate-root.schema';
 import autopopulateSoftDelete from 'src/utils/mongoose-plugins/autopopulate-soft-delete';
 
 @Schema({
   timestamps: true,
-  collection: COLLECTION_NAMES.MESSAGE,
+  collection: COLLECTION_NAMES.LIKE,
 })
-export class Message {
+export class Like extends AggregateRoot {
   @SuperProp({
-    type: String,
+    type: Types.ObjectId,
+    required: false,
+    ref: 'Post',
+    refClass: Post,
   })
-  text: string;
+  post: Types.ObjectId;
 
   @SuperProp({
     type: Types.ObjectId,
+    required: false,
     ref: 'User',
     refClass: User,
-    required: true,
   })
-  sender: Types.ObjectId;
-
-  @SuperProp({
-    type: Types.ObjectId,
-    ref: 'Conversation',
-    refClass: Conversation,
-    required: true,
-  })
-  conversation: Types.ObjectId;
+  user: Types.ObjectId;
 }
 
-export const MessageSchema = SchemaFactory.createForClass(Message);
-MessageSchema.plugin(autopopulateSoftDelete);
+export const LikeSchema = SchemaFactory.createForClass(Like);
+LikeSchema.plugin(autopopulateSoftDelete);

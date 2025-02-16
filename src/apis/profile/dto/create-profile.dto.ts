@@ -1,4 +1,5 @@
 import { SuperApiProperty } from '@libs/super-core/decorators/super-api-property.decorator';
+import { Type } from 'class-transformer';
 import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateProfileDto {
@@ -27,11 +28,11 @@ export class CreateProfileDto {
   address: string;
 
   @SuperApiProperty({
-    type: Number,
+    type: String,
     required: false,
   })
   @IsOptional()
-  @IsNumber()
+  @IsString()
   postalCode: string;
 
   @SuperApiProperty({
@@ -48,7 +49,7 @@ export class CreateProfileDto {
   })
   @IsOptional()
   @IsString()
-  Phone: string;
+  phone: string;
 
   @SuperApiProperty({
     type: Date,
@@ -56,15 +57,8 @@ export class CreateProfileDto {
   })
   @IsOptional()
   @IsDate()
+  @Type(() => Date)
   birthday: Date;
-
-  @SuperApiProperty({
-    type: String,
-    required: false,
-  })
-  @IsOptional()
-  @IsString()
-  image: string;
 
   @SuperApiProperty({
     type: String,

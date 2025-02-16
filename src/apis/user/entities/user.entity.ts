@@ -28,7 +28,7 @@ export class User extends AggregateRoot {
   @SuperProp({
     autoPopulateExclude: true,
     type: String,
-    required: true,
+    required: false,
   })
   password: string;
 
@@ -40,9 +40,33 @@ export class User extends AggregateRoot {
   role: string;
 
   @SuperProp({
+    type: Boolean,
+    default: false,
+  })
+  isOnline: boolean;
+
+  @SuperProp({
+    type: Boolean,
+    default: false,
+  })
+  isBanned: boolean;
+
+  @SuperProp({
+    type: Boolean,
+    default: false,
+  })
+  isDeleted: boolean;
+
+  @SuperProp({
+    type: Date,
+    required: false,
+  })
+  lastOnline: Date;
+
+  @SuperProp({
     type: [Types.ObjectId],
     required: false,
-    ref: COLLECTION_NAMES.USER,
+    ref: 'User',
     refClass: User,
   })
   friends: Types.ObjectId[];
@@ -50,11 +74,11 @@ export class User extends AggregateRoot {
   @SuperProp({
     type: Types.ObjectId,
     required: false,
-    ref: COLLECTION_NAMES.PROFILE,
+    ref: 'Profile',
     refClass: Profile,
   })
   profile: Types.ObjectId;
 }
 
-export const UserShema = SchemaFactory.createForClass(User);
-UserShema.plugin(autopopulateSoftDelete);
+export const UserSchema = SchemaFactory.createForClass(User);
+UserSchema.plugin(autopopulateSoftDelete);

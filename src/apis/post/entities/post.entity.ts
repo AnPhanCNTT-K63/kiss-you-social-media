@@ -19,6 +19,18 @@ export class Post extends AggregateRoot {
   content: string;
 
   @SuperProp({
+    type: Boolean,
+    default: false,
+  })
+  isApproved: boolean;
+
+  @SuperProp({
+    type: Boolean,
+    default: false,
+  })
+  isDeleted: boolean;
+
+  @SuperProp({
     type: Number,
     required: true,
     default: 0,
@@ -48,15 +60,22 @@ export class Post extends AggregateRoot {
 
   @SuperProp({
     type: Types.ObjectId,
-    ref: COLLECTION_NAMES.FILE,
+    ref: 'File',
     refClass: File,
   })
   image: Types.ObjectId;
 
   @SuperProp({
     type: Types.ObjectId,
+    ref: 'Post',
+    refClass: Post,
+  })
+  sharedPost: Types.ObjectId;
+
+  @SuperProp({
+    type: Types.ObjectId,
     required: false,
-    ref: COLLECTION_NAMES.USER,
+    ref: 'User',
     refClass: User,
   })
   createdBy: Types.ObjectId;

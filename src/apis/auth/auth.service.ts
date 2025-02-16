@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { UserLoginDto } from './dto/user-login.dto';
@@ -10,6 +6,8 @@ import { UserService } from '../user/user.service';
 import { appSettings } from 'src/configs/app-settings';
 import { UserRegisterDto } from './dto/user-register.dto';
 import { UserPayload } from 'src/common/models/user-payload.model';
+import { CheckPasswordDto } from './dto/check-password.dto';
+import { Types } from 'mongoose';
 
 @Injectable()
 export class AuthService {
@@ -31,7 +29,12 @@ export class AuthService {
 
       var existingUser = await this.userService.getOne({ username });
 
-      if (existingUser) throw new BadRequestException('User already existed');
+      if (existingUser)
+        throw new BadRequestException('Tên đã được người khác sử dụng');
+
+      var existingUserEmail = await this.userService.getOne({ email });
+
+      if (existingUserEmail) throw new BadRequestException('Email đã tồn tại');
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -48,11 +51,6 @@ export class AuthService {
       //     secret: appSettings.jwt.secret,
       //   },
       // );
-
-      return {
-        message: 'User successfully registered',
-        // accessToken,
-      };
     } catch (error) {
       throw new BadRequestException(error);
     }
@@ -73,6 +71,12 @@ export class AuthService {
       throw new BadRequestException('Invalid email or password');
     }
 
+    if (user.isBanned) throw new BadRequestException('Tài khoản đã bị cấm');
+
+    if (user.isDeleted)
+      throw new BadRequestException(
+        'Tài khoản đã bị khoá, sau 30 ngày sẽ tiến hành xóa',
+      );
     const userPayload: UserPayload = {
       _id: user._id,
       role: user.role,
@@ -104,5 +108,24 @@ export class AuthService {
       accessToken,
       refreshToken,
     };
+  }
+
+  async checkPassword(checkDto: CheckPasswordDto) {
+    try {
+      const existingUser = await this.userService.getOne({
+        _id: new Types.ObjectId(checkDto.user),
+      });
+
+      const isPasswordValid = await bcrypt.compare(
+        checkDto.password,
+        existingUser.password,
+      );
+
+      if (!isPasswordValid) {
+        throw new BadRequestException('Invalid email or password');
+      }
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
   }
 }

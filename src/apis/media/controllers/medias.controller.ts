@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   Post,
   UploadedFile,
@@ -14,7 +13,6 @@ import { UserPayload } from 'src/common/models/user-payload.model';
 import { Me } from 'src/decorators/me.decorator';
 import { ApiBearerAuth, ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@libs/super-authorize/guards/jwt-auth.guard';
-import { UploadFileInterceptor } from 'src/interceptors/upload-image.interceptor';
 
 @ApiBearerAuth()
 @Controller('media')

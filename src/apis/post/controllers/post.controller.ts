@@ -1,8 +1,12 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
+  Patch,
   Post,
+  Query,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -16,6 +20,11 @@ import { UserPayload } from 'src/common/models/user-payload.model';
 import { IUploadedMulterFile } from 'src/packages/s3/s3.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { appSettings } from 'src/configs/app-settings';
+import { FilterQuery } from 'mongoose';
+import { Post as PostEntity } from '../entities/post.entity';
+import { ApprovePostDto } from '../dto/approve-post.dto';
+import { FilterDto } from '../dto/filter.dto';
+import { DeletePostDto } from '../dto/delete-post.dto';
 
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
@@ -23,7 +32,7 @@ import { appSettings } from 'src/configs/app-settings';
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
-  @Post('/create')
+  @Post('create')
   @UseInterceptors(
     FileInterceptor('file', {
       limits: {
@@ -45,8 +54,28 @@ export class PostController {
     return this.postService.createOne(user, postDto, file || null);
   }
 
-  @Get('/get-all')
-  getAll() {
-    return this.postService.getAll();
+  @Get('get-all')
+  getAll(@Query() filter: FilterDto) {
+    return this.postService.getAll(filter);
+  }
+
+  @Patch('set-approval-post/:id')
+  setApprove(@Param('id') id: string, @Body() dto: ApprovePostDto) {
+    return this.postService.setApprove(id, dto);
+  }
+
+  @Patch('set-delete-post/:id')
+  setDelete(@Param('id') id: string, @Body() dto: DeletePostDto) {
+    return this.postService.setDelete(id, dto);
+  }
+
+  @Get('user/:id')
+  getByUserId(@Param('id') id: string) {
+    return this.postService.getByUserId(id);
+  }
+
+  @Delete(':id')
+  deletePost(@Param('id') id: string) {
+    return this.postService.permanentlyDelete(id);
   }
 }

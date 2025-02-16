@@ -8,47 +8,30 @@ import autopopulateSoftDelete from 'src/utils/mongoose-plugins/autopopulate-soft
 
 @Schema({
   timestamps: true,
-  collection: COLLECTION_NAMES.FILE,
+  collection: COLLECTION_NAMES.NOTIFICATION,
 })
-export class File extends AggregateRoot {
-  @SuperProp({
-    type: String,
-    ref: COLLECTION_NAMES.FILE,
-  })
-  filePath: string;
-
+export class Notification extends AggregateRoot {
   @SuperProp({
     type: String,
   })
-  name: string;
-
-  @SuperProp({
-    type: String,
-  })
-  filename: string;
-
-  @SuperProp({ type: String })
-  folder: string;
-
-  @SuperProp({ type: String })
-  note: string;
-
-  @SuperProp({ type: String })
-  mime: string;
-
-  @SuperProp({ type: Number })
-  size: number;
-
-  @SuperProp({ type: String })
-  alt: string;
+  type: string;
 
   @SuperProp({
     type: Types.ObjectId,
+    required: true,
     ref: 'User',
     refClass: User,
   })
-  createdBy: Types.ObjectId;
+  receiver: Types.ObjectId;
+
+  @SuperProp({
+    type: Types.ObjectId,
+    required: true,
+    ref: 'User',
+    refClass: User,
+  })
+  sender: Types.ObjectId;
 }
 
-export const FileSchema = SchemaFactory.createForClass(File);
-FileSchema.plugin(autopopulateSoftDelete);
+export const NotificationSchema = SchemaFactory.createForClass(Notification);
+NotificationSchema.plugin(autopopulateSoftDelete);

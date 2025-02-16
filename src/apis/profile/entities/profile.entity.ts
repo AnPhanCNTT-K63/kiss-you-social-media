@@ -43,7 +43,7 @@ export class Profile {
     type: String,
     required: false,
   })
-  Phone: string;
+  phone: string;
 
   @SuperProp({
     type: Date,
@@ -55,18 +55,28 @@ export class Profile {
     type: String,
     required: false,
   })
-  image: string;
-
-  @SuperProp({
-    type: String,
-    required: false,
-  })
   country: string;
 
   @SuperProp({
     type: Types.ObjectId,
+    required: false,
+    ref: 'File',
+    refClass: File,
+  })
+  coverPhoto: Types.ObjectId;
+
+  @SuperProp({
+    type: Types.ObjectId,
+    required: false,
+    ref: 'File',
+    refClass: File,
+  })
+  avatar: Types.ObjectId;
+
+  @SuperProp({
+    type: Types.ObjectId,
     required: true,
-    ref: COLLECTION_NAMES.USER,
+    ref: 'User',
     refClass: User,
   })
   user: Types.ObjectId;

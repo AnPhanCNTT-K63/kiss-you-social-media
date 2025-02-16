@@ -24,6 +24,10 @@ export enum COLLECTION_NAMES {
   MISSION = 'mission',
   USER_REFERRAL = 'userReferrals',
   PAGE = 'pages',
+  LIKE = 'likes',
+  SHARE = 'shares',
+  COMMENT = 'comments',
+  RESPONSE = 'responses',
 }
 
 export enum CountryCode {

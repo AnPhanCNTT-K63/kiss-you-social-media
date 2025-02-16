@@ -11,12 +11,16 @@ import { S3Module } from './packages/s3/s3.module';
 import { MediaModule } from './apis/media/medias.module';
 import { ConversationModule } from './apis/conversation/conversation.module';
 import { MessageModule } from './apis/message/message.module';
+import { InteractionModule } from './apis/interaction/interaction.module';
+import { NotificationModule } from './apis/notification/Notification.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    ScheduleModule.forRoot(),
     MongooseModule.forRootAsync({
       useFactory: async () => ({
         uri: appSettings.mongoose.uri,
@@ -29,6 +33,8 @@ import { MessageModule } from './apis/message/message.module';
     MediaModule,
     ConversationModule,
     MessageModule,
+    InteractionModule,
+    NotificationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
