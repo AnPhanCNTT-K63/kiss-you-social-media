@@ -6,7 +6,7 @@ import { User, UserSchema } from './entities/user.entity';
 import { Profile, ProfileSchema } from '../profile/entities/profile.entity';
 import { ProfileModule } from '../profile/profile.module';
 import { PostModule } from '../post/post.module';
-import { NotificationModule } from '../notification/Notification.module';
+import { NotificationModule } from '../notification/notification.module';
 
 @Module({
   imports: [

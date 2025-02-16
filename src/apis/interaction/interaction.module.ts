@@ -13,7 +13,7 @@ import { CommentService } from './comment.service';
 import { CommentResponseService } from './comment-response.service';
 import { Share, ShareSchema } from './entities/share.entity';
 import { ShareService } from './share.service';
-import { NotificationModule } from '../notification/Notification.module';
+import { NotificationModule } from '../notification/notification.module';
 
 @Module({
   imports: [
