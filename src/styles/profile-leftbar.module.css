@@ -1,0 +1,37 @@
+.leftBar {
+  width: 250px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.friendList {
+  list-style: none;
+  padding: 0;
+}
+
+.friendItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.friendPic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.friendName {
+  font-size: 14px;
+  font-weight: bold;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Toolbar,
   Typography,
@@ -7,13 +7,10 @@ import {
   IconButton,
   Avatar,
   Badge,
-  Menu,
-  MenuItem,
 } from "@mui/material";
 import {
   Search as SearchIcon,
   Home as HomeIcon,
-  Notifications as NotificationsIcon,
   Chat as ChatIcon,
   People as PeopleIcon,
   Storefront as StorefrontIcon,
@@ -21,9 +18,46 @@ import {
 } from "@mui/icons-material";
 import styles from "../../styles/navbar.module.css";
 import { Link } from "react-router-dom";
+import ProfileMenu from "./menu/ProfileMenu";
+import UserContext from "../../UserContext";
+import { getById, ping } from "../../apis/services/UserService";
+import NotificationDropdown from "../notification-dropdown/NotificationDropdown";
 
 const Navbar = () => {
+  const user = useContext(UserContext);
+  const [currentUser, setCurrentUser] = useState({});
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        const res = await ping(user?._id);
+      } catch (error) {
+        console.error("Error in heartbeat:", error.message || error);
+      }
+    }, process.env.REACT_APP_REFRESH_TIME);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [user?._id]);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await getById(user?._id);
+      setCurrentUser(res.data);
+    };
+    fetchUser();
+  }, []);
+
+  localStorage.setItem(
+    "avatar",
+    currentUser?.profile?.avatar?.filePath || "/noAvatar.png"
+  );
+  localStorage.setItem(
+    "coverPhoto",
+    currentUser?.profile?.coverPhoto?.filePath
+  );
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -53,12 +87,17 @@ const Navbar = () => {
 
         {/* Centered Icons */}
         <Box className={styles.iconContainerCenter}>
-          <IconButton className={styles.iconButton}>
-            <HomeIcon fontSize="large" />
-          </IconButton>
-          <IconButton className={styles.iconButton}>
-            <PeopleIcon fontSize="large" />
-          </IconButton>
+          <Link to={`/`}>
+            <IconButton className={styles.iconButton}>
+              <HomeIcon fontSize="large" />
+            </IconButton>
+          </Link>
+          <Link to={`/friends`}>
+            <IconButton className={styles.iconButton}>
+              <PeopleIcon fontSize="large" />
+            </IconButton>
+          </Link>
+
           <IconButton className={styles.iconButton}>
             <OndemandVideo fontSize="large" />
           </IconButton>
@@ -69,20 +108,20 @@ const Navbar = () => {
 
         {/* Right Icons */}
         <Box className={styles.iconContainer}>
-          <IconButton className={styles.iconButton}>
-            <Badge badgeContent={4} color="error">
-              <ChatIcon fontSize="large" />
-            </Badge>
-          </IconButton>
-          <IconButton className={styles.iconButton}>
-            <Badge badgeContent={3} color="error">
-              <NotificationsIcon fontSize="large" />
-            </Badge>
-          </IconButton>
+          <Link to={`/messenger`}>
+            <IconButton className={styles.iconButton}>
+              <Badge color="error">
+                <ChatIcon fontSize="large" />
+              </Badge>
+            </IconButton>
+          </Link>
+
+          <NotificationDropdown />
+
           <IconButton onClick={handleMenuOpen}>
             <Avatar
               alt="Profile Picture"
-              src="/noAvatar.png"
+              src={localStorage.getItem("avatar")}
               className={styles.avatar}
             />
           </IconButton>
@@ -90,25 +129,11 @@ const Navbar = () => {
       </Toolbar>
 
       {/* Dropdown Menu for Profile */}
-      <Menu
+      <ProfileMenu
         anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
-        className={styles.menu}
-        classes={{ paper: styles.menuPaper }}
-        disableScrollLock
-      >
-        <MenuItem onClick={handleMenuClose} className={styles.menuItem}>
-          Profile
-        </MenuItem>
-
-        <MenuItem onClick={handleMenuClose} className={styles.menuItem}>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose} className={styles.menuItem}>
-          Logout
-        </MenuItem>
-      </Menu>
+        handleMenuClose={handleMenuClose}
+        styles={styles}
+      />
     </div>
   );
 };

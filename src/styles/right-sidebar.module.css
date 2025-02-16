@@ -1,0 +1,33 @@
+.rightSidebar {
+  width: 300px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #f7f7f8;
+  border-left: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.rightSidebar .onlineFriends {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.rightSidebar .chatBoxContainer {
+  flex: 2;
+}
+
+@media (max-width: 768px) {
+  .rightSidebar {
+    position: static;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .rightSidebar .onlineFriends {
+    margin-bottom: 10px;
+  }
+}

@@ -19,9 +19,60 @@ export const createPost = async (post) => {
   }
 };
 
-export const getAll = async () => {
+export const getAll = async (filter) => {
   try {
-    const res = await apiClient.get(`/post/get-all`);
+    const res = await apiClient.get(`/post/get-all`, {
+      params: filter,
+    });
+    return res.data;
+  } catch (error) {
+    handleApiError(error);
+  }
+};
+
+export const setApproval = async (id, flag) => {
+  try {
+    const res = await apiClient.patch(`/post/set-approval-post/${id}`, {
+      flag: flag,
+    });
+    return res.data;
+  } catch (error) {
+    handleApiError(error);
+  }
+};
+
+export const setDelete = async (id, flag) => {
+  try {
+    const res = await apiClient.patch(`/post/set-delete-post/${id}`, {
+      flag: flag,
+    });
+    return res.data;
+  } catch (error) {
+    handleApiError(error);
+  }
+};
+
+export const deletePost = async (id) => {
+  try {
+    const res = await apiClient.delete(`/post/${id}`);
+    return res.data;
+  } catch (error) {
+    handleApiError(error);
+  }
+};
+
+export const getByUserId = async (id) => {
+  try {
+    const res = await apiClient.get(`/post/user/${id}`);
+    return res.data;
+  } catch (error) {
+    handleApiError(error);
+  }
+};
+
+export const getPendingPost = async (id) => {
+  try {
+    const res = await apiClient.get(`/post/user/${id}`);
     return res.data;
   } catch (error) {
     handleApiError(error);

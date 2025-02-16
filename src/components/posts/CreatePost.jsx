@@ -14,6 +14,7 @@ import {
   Close as CloseIcon,
   PhotoCamera as PhotoCameraIcon,
 } from "@mui/icons-material";
+import Swal from "sweetalert2";
 
 import styles from "../../styles/create-post.module.css";
 
@@ -40,34 +41,47 @@ const CreatePost = ({ avatar, username, onPost }) => {
 
   const handlePost = () => {
     if (postContent.trim()) {
+      // Hiển thị thông báo thành công bằng SweetAlert2
+      Swal.fire({
+        icon: "info",
+        title: "Bài viết của bạn đang chờ phê duyệt.",
+        text: "Bài viết sẽ được admin xem xét trước khi được đăng.",
+        confirmButtonText: "OK",
+      });
+
       onPost({
         content: postContent,
         image: imageUpload,
       });
+
       setImageUpload(null);
       handleClose();
     } else {
-      alert("Please write something to post.");
+      Swal.fire({
+        icon: "warning",
+        title: "Bài viết trống",
+        text: "Vui lòng viết gì đó trước khi đăng.",
+        confirmButtonText: "OK",
+      });
     }
   };
 
   return (
     <>
-      {/* Clickable Box */}
       <Card className={styles.card} onClick={handleOpen}>
         <CardContent className={styles.cardContent}>
           <Avatar alt={username} src={avatar} className={styles.avatar} />
           <Typography variant="body1" className={styles.placeholder}>
-            What's on your mind, {username}?
+            Bạn đang nghĩ gì vậy, {username}?
           </Typography>
         </CardContent>
       </Card>
 
-      {/* Modal for Creating Post */}
+      {/* Modal tạo bài viết */}
       <Modal open={open} onClose={handleClose}>
         <Box className={styles.modal}>
           <Box className={styles.modalHeader}>
-            <Typography variant="h6">Create Post</Typography>
+            <Typography variant="h6">Tạo bài viết</Typography>
             <IconButton onClick={handleClose}>
               <CloseIcon />
             </IconButton>
@@ -75,7 +89,7 @@ const CreatePost = ({ avatar, username, onPost }) => {
 
           <TextField
             className={styles.textField}
-            placeholder="What's on your mind?"
+            placeholder="Bạn đang nghĩ gì?"
             multiline
             rows={4}
             variant="outlined"
@@ -87,7 +101,7 @@ const CreatePost = ({ avatar, username, onPost }) => {
             <Box className={styles.imagePreview}>
               <img
                 src={postImage}
-                alt="Preview"
+                alt="Xem trước"
                 className={styles.previewImage}
               />
             </Box>
@@ -100,17 +114,17 @@ const CreatePost = ({ avatar, username, onPost }) => {
               startIcon={<PhotoCameraIcon />}
               className={styles.uploadButton}
             >
-              Upload Image
+              Tải lên hình ảnh
               <input type="file" hidden onChange={handleImageUpload} />
             </Button>
           </Box>
 
           <Box className={styles.buttonGroup}>
             <Button variant="contained" color="primary" onClick={handlePost}>
-              Post
+              Đăng
             </Button>
             <Button variant="outlined" color="secondary" onClick={handleClose}>
-              Cancel
+              Hủy
             </Button>
           </Box>
         </Box>

@@ -17,7 +17,11 @@ export default function Conversation({ conversation, currentUser }) {
 
   return (
     <div className={styles.conversation}>
-      <img className={styles.conversationImg} src={"/noAvatar.png"} alt="" />
+      <img
+        className={styles.conversationImg}
+        src={user?.profile?.avatar?.filePath || "/noAvatar.png"}
+        alt=""
+      />
       <span className={styles.conversationName}>{user?.username}</span>
     </div>
   );

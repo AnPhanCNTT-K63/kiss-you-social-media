@@ -1,0 +1,198 @@
+/* Scope all styles under .signupPage */
+.signupPage {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(145deg, #ff758c, #ff7eb3, #fad0c4);
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  animation: signupBackgroundAnimation 10s infinite alternate;
+}
+
+/* Background animation */
+@keyframes signupBackgroundAnimation {
+  0% {
+    background: linear-gradient(145deg, #ff758c, #ff7eb3, #fad0c4);
+  }
+  50% {
+    background: linear-gradient(145deg, #ff7eb3, #fad0c4, #ff758c);
+  }
+  100% {
+    background: linear-gradient(145deg, #fad0c4, #ff758c, #ff7eb3);
+  }
+}
+
+/* Floating heart animation */
+.signupPage::before,
+.signupPage::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: rgba(255, 182, 193, 0.4);
+  border-radius: 50%;
+  animation: signupFloat 8s ease-in-out infinite;
+  z-index: 0;
+}
+
+.signupPage::before {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.signupPage::after {
+  bottom: 20%;
+  right: 10%;
+  animation-delay: 4s;
+}
+
+@keyframes signupFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Floating heart elements */
+.signupPage .heart {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 105, 135, 0.7);
+  border-radius: 50%;
+  animation: signupFloatHearts 10s linear infinite;
+  opacity: 0.8;
+}
+
+.signupPage .heart:nth-child(1) {
+  left: 20%;
+  animation-duration: 12s;
+  animation-delay: 0s;
+}
+
+.signupPage .heart:nth-child(2) {
+  left: 40%;
+  animation-duration: 9s;
+  animation-delay: 3s;
+}
+
+.signupPage .heart:nth-child(3) {
+  left: 60%;
+  animation-duration: 10s;
+  animation-delay: 6s;
+}
+
+@keyframes signupFloatHearts {
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Container for the sign-up box */
+.signupPage .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Form box with glass effect */
+.signupPage .box {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 450px;
+  backdrop-filter: blur(10px);
+  animation: signupFadeIn 1.5s ease-out;
+}
+
+/* Fade-in effect */
+@keyframes signupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Main title */
+.signupPage .title {
+  color: #d81b60;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-align: center;
+  animation: signupSlideIn 1.2s ease-out;
+}
+
+/* Subtitle text */
+.signupPage .subtitle {
+  color: #757575;
+  margin-bottom: 20px;
+  text-align: center;
+  animation: signupSlideIn 1.4s ease-out;
+}
+
+/* Input fields with custom padding */
+.signupPage .input {
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+/* Submit button with a gradient and hover effect */
+.signupPage .submitButton {
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  color: white;
+  font-weight: bold;
+  height: 50px;
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.signupPage .submitButton:hover {
+  background: linear-gradient(135deg, #fad0c4, #ff9a9e);
+  transform: scale(1.05);
+}
+
+/* Slide-in effect for title and subtitle */
+@keyframes signupSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+  .signupPage .container {
+    padding: 20px;
+  }
+
+  .signupPage .box {
+    padding: 20px;
+  }
+}

@@ -2,9 +2,13 @@ import { useState, useContext, useEffect } from "react";
 import PostCard from "./PostCard";
 import CreatePost from "./CreatePost";
 import UserContext from "../../UserContext";
-import { createPost, getAll } from "../../apis/services/PostService";
+import {
+  createPost,
+  getAll,
+  getByUserId,
+} from "../../apis/services/PostService";
 
-export default function PostList() {
+export default function PostList({ userId }) {
   const user = useContext(UserContext);
   const [posts, setPosts] = useState([]);
 
@@ -13,41 +17,59 @@ export default function PostList() {
       return;
     }
 
-    const fetchPosts = async () => {
-      const res = await getAll();
+    if (!userId) {
+      const fetchPosts = async () => {
+        const res = await getAll({ isApproved: true, isDeleted: false });
 
-      setPosts(res.data);
-    };
-    fetchPosts();
-  }, []);
+        setPosts(res.data);
+      };
+      fetchPosts();
+    } else {
+      const fetchUserPosts = async () => {
+        const res = await getByUserId(userId);
+
+        setPosts(res.data);
+      };
+      fetchUserPosts();
+    }
+  }, [userId]);
 
   const handleNewPost = async (post) => {
-    const res = await createPost(post);
-
-    console.log(res);
-
-    if (res.message === "OK") {
-      setPosts((prevPosts) => [...prevPosts, res.data]);
-    }
-
-    alert(res.message);
+    await createPost(post);
   };
 
   return (
     <div style={{ marginTop: "100px" }}>
-      <CreatePost
-        avatar="https://via.placeholder.com/150"
-        username={user?.username || "No name"}
-        onPost={handleNewPost}
-      />
+      {userId && userId == user._id && (
+        <CreatePost
+          avatar={localStorage.getItem("avatar" || "noAvatar.png")}
+          username={user?.username || "No name"}
+          onPost={handleNewPost}
+        />
+      )}
+
+      {!userId && (
+        <CreatePost
+          avatar={localStorage.getItem("avatar" || "noAvatar.png")}
+          username={user?.username || "No name"}
+          onPost={handleNewPost}
+        />
+      )}
+
       {[...posts].reverse().map((post) => (
         <PostCard
           key={post?._id}
-          avatar={post?.avatar || "https://via.placeholder.com/150"}
+          id={post?._id}
+          owner={post?.createdBy}
+          avatar={post?.createdBy?.profile?.avatar?.filePath || "/noAvatar.png"}
           username={post?.createdBy.username || "No name"}
           timestamp={post?.createdAt}
           content={post?.content}
           image={post?.image?.filePath}
+          likes={post?.likes}
+          comments={post?.comments}
+          shares={post?.shares}
+          sharedPost={post?.sharedPost}
         />
       ))}
     </div>

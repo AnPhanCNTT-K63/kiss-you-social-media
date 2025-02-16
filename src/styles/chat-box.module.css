@@ -1,0 +1,64 @@
+.chatBox {
+  width: 350px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.chatBoxHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px 8px 0 0;
+}
+
+.chatBoxContent {
+  padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.chatBoxMessage {
+  margin: 5px 0;
+  padding: 8px 12px;
+  background-color: #f1f0f0;
+  border-radius: 16px;
+  align-self: flex-start;
+}
+
+.chatBoxMessageOwn {
+  margin: 5px 0;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 16px;
+  align-self: flex-end;
+}
+
+.chatBoxInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+}
+
+.chatBoxInput {
+  flex: 1;
+}
+
+.chatBoxSendButton {
+  padding: 8px 12px;
+}

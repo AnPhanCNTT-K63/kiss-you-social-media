@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Menu, MenuItem } from "@mui/material";
-import styles from "../styles/navbar.module.css";
+import UserContext from "../../../UserContext";
+import { Link, useNavigate } from "react-router-dom";
 
-export default ProfileMenu = ({ anchorEl, handleMenuClose }) => {
+export default function ProfileMenu({ anchorEl, handleMenuClose, styles }) {
+  const user = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/signin");
+  };
+
   return (
     <Menu
       anchorEl={anchorEl}
@@ -12,15 +21,25 @@ export default ProfileMenu = ({ anchorEl, handleMenuClose }) => {
       classes={{ paper: styles.menuPaper }}
       disableScrollLock
     >
-      <MenuItem onClick={handleMenuClose} className={styles.menuItem}>
-        Profile
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose} className={styles.menuItem}>
-        Settings
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose} className={styles.menuItem}>
-        Logout
+      <Link to={`/profile/${user._id}`} onClick={handleMenuClose}>
+        <MenuItem className={styles.menuItem}>Trang Cá Nhân</MenuItem>
+      </Link>
+      <Link to={`/account`} onClick={handleMenuClose}>
+        <MenuItem className={styles.menuItem}>Cài Đặt</MenuItem>
+      </Link>
+      {user?.role === "admin" && (
+        <Link to={`/admin/dashboard`} onClick={handleMenuClose}>
+          <MenuItem className={styles.menuItem}>Admin</MenuItem>
+        </Link>
+      )}
+      {user?.role === "admin" && (
+        <Link to={`/statistics`} onClick={handleMenuClose}>
+          <MenuItem className={styles.menuItem}>Statistics</MenuItem>
+        </Link>
+      )}
+      <MenuItem onClick={handleLogout} className={styles.menuItem}>
+        Đăng Xuất
       </MenuItem>
     </Menu>
   );
-};
+}

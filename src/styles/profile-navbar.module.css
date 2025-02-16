@@ -1,0 +1,36 @@
+.navBar {
+  background-color: white;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  margin-top: -10px;
+}
+
+.navList {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navItem {
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.navItem:hover {
+  background-color: #e4e6eb;
+}
+
+.active {
+  color: #1877f2;
+  border-bottom: 2px solid #1877f2;
+  padding-bottom: 3px;
+}

@@ -18,3 +18,12 @@ export const signup = async (user) => {
     handleApiError(error);
   }
 };
+
+export const checkPassword = async (data) => {
+  try {
+    const res = await apiClient.post(`/auth/check-password`, data);
+    return res.data;
+  } catch (error) {
+    handleApiError(error);
+  }
+};

@@ -13,7 +13,7 @@ export const UserProvider = ({ children }) => {
           username: decodedToken.username,
           role: decodedToken.role,
           _id: decodedToken._id,
-          email: decodedToken.unique_name,
+          email: decodedToken.email,
         };
       })()
     : null;

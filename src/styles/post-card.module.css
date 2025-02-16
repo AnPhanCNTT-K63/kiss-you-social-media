@@ -9,6 +9,12 @@
   font-weight: bold;
 }
 
+.shared-text {
+  font-weight: normal;
+  color: gray;
+  margin-left: 4px;
+}
+
 .card-subheader {
   color: gray;
 }
@@ -25,7 +31,8 @@
   border-radius: 8px;
   margin-top: 8px;
   max-height: 400px;
-  object-fit: cover;
+  object-fit: contain;
+  display: block;
 }
 
 .card-actions {
@@ -39,4 +46,29 @@
 
 .action-text {
   margin-left: 8px;
+  min-width: 50px;
+  text-align: left;
+}
+
+/* Fancy Loading Text */
+.loading-text {
+  font-size: 16px;
+  font-weight: bold;
+  color: gray;
+  text-align: center;
+  margin-top: 20px;
+  animation: pulse 1.5s infinite;
+}
+
+/* Pulsating animation for the loading text */
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }
