@@ -12,7 +12,7 @@ import { MediaModule } from './apis/media/medias.module';
 import { ConversationModule } from './apis/conversation/conversation.module';
 import { MessageModule } from './apis/message/message.module';
 import { InteractionModule } from './apis/interaction/interaction.module';
-import { NotificationModule } from './apis/notification/Notification.module';
+import { NotificationModule } from './apis/notification/notification.module';
 import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
