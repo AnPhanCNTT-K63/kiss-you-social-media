@@ -5,8 +5,7 @@ FROM node:18-alpine as builder
 WORKDIR /app
 
 # Step 3: Copy package.json and install dependencies
-COPY package.json package-lock.json ./
-
+COPY . .
 RUN npm install --only=production
 
 # Step 4: Install NestJS CLI globally
