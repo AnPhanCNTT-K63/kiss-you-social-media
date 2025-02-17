@@ -1,33 +1,23 @@
-# Step 1: Use a Node.js base image
-FROM node:18-alpine as builder
+# Use an official Node.js runtime as a parent image
+FROM node:18
 
-# Step 2: Set working directory inside the container
-WORKDIR /app
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-# Step 3: Copy package.json and install dependencies
+# Copy package.json and package-lock.json (if available)
 COPY package*.json ./
-RUN npm install --only=production
 
-# Step 4: Install NestJS CLI globally
-RUN npm install -g @nestjs/cli
+# Install dependencies
+RUN npm install
 
-# Step 5: Copy the rest of the application and build it
+# Copy the rest of the application files
 COPY . .
+
+# Build the NestJS app
 RUN npm run build
 
-# Step 6: Create a lightweight runtime image
-FROM node:18-alpine
-
-# Step 7: Set working directory
-WORKDIR /app
-
-# Step 8: Copy production dependencies
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/dist ./dist
-
-# Step 9: Expose the application port
+# Expose the application port
 EXPOSE 3000
 
-# Step 10: Command to run the application
-CMD ["node", "dist/src/main"]
-
+# Define the command to run the application
+CMD ["npm", "run", "start:prod"]
