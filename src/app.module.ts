@@ -23,7 +23,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     ScheduleModule.forRoot(),
     MongooseModule.forRootAsync({
       useFactory: async () => ({
-        uri: appSettings.mongoose.uri,
+        uri: 'mongodb+srv://phanducan147:WUwbrr0kHuNMRnKL@cluster0.xdq0e.mongodb.net/',
       }),
     }),
     UserModule,

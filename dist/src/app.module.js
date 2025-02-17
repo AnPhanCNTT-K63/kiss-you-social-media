@@ -11,7 +11,6 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const mongoose_1 = require("@nestjs/mongoose");
-const app_settings_1 = require("./configs/app-settings");
 const config_1 = require("@nestjs/config");
 const user_module_1 = require("./apis/user/user.module");
 const auth_module_1 = require("./apis/auth/auth.module");
@@ -35,7 +34,7 @@ exports.AppModule = AppModule = __decorate([
             schedule_1.ScheduleModule.forRoot(),
             mongoose_1.MongooseModule.forRootAsync({
                 useFactory: async () => ({
-                    uri: app_settings_1.appSettings.mongoose.uri,
+                    uri: 'mongodb+srv://phanducan147:WUwbrr0kHuNMRnKL@cluster0.xdq0e.mongodb.net/',
                 }),
             }),
             user_module_1.UserModule,
