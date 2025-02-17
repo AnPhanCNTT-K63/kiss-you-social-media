@@ -2,7 +2,7 @@
 FROM node:18-alpine as builder
 
 # Step 2: Set working directory inside the container
-WORKDIR /api
+WORKDIR /app
 
 # Step 3: Copy package.json and install dependencies
 COPY . .
