@@ -21,7 +21,7 @@ exports.appSettings = {
         sessionSecret: process.env.SESSION_SECRET,
     },
     mongoose: {
-        uri: process.env.MONGO_URI,
+        uri: process.env.MONGO_URL,
     },
     s3: {
         accessKey: process.env.AWS_ACCESS_KEY_ID,
