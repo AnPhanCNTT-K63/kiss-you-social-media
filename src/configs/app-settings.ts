@@ -19,7 +19,7 @@ export const appSettings = {
     sessionSecret: process.env.SESSION_SECRET,
   },
   mongoose: {
-    uri: 'mongodb+srv://phanducan147:WUwbrr0kHuNMRnKL@cluster0.xdq0e.mongodb.net/kiss_you',
+    uri: process.env.MONGO_URL,
   },
   s3: {
     accessKey: process.env.AWS_ACCESS_KEY_ID,
