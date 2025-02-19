@@ -28,6 +28,7 @@ async function bootstrap() {
     }));
     app.useGlobalInterceptors(new transform_interceptor_1.TransformInterceptor());
     await app.listen(process.env.PORT ?? 3000);
+    console.log(process.env.PORT);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
