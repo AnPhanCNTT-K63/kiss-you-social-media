@@ -5,6 +5,7 @@ const app_module_1 = require("./app.module");
 const swagger_1 = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const transform_interceptor_1 = require("./interceptors/transform.interceptor");
+const app_settings_1 = require("./configs/app-settings");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule, {
         cors: true,
@@ -28,6 +29,7 @@ async function bootstrap() {
     }));
     app.useGlobalInterceptors(new transform_interceptor_1.TransformInterceptor());
     await app.listen(process.env.PORT ?? 3000);
+    console.log(app_settings_1.appSettings.mongoose.uri);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
