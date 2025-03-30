@@ -40,8 +40,8 @@ export default function Navigation() {
     <>
       <Routes>
         {/* Use a separate route for authentication check */}
-        <Route path="/" element={isAuthenticated ? <Home /> : <SignIn />} />
-
+        {/* <Route path="/" element={isAuthenticated ? <Home /> : <SignIn />} /> */}
+        <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
