@@ -12,7 +12,7 @@ services:
     networks:
       - app-network
 
-  nestjs-app:
+  kiss-you:
     build:
       context: .
     container_name: nestjs-app

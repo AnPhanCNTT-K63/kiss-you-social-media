@@ -1,23 +1,20 @@
-# Use an official Node.js runtime as a parent image
+# Base image
 FROM node:18
 
-# Set the working directory in the container
+# Create app directory
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json (if available)
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
 
-# Install dependencies
+# Install app dependencies
 RUN npm install
 
-# Copy the rest of the application files
+# Bundle app source
 COPY . .
 
-# Build the NestJS app
+# Creates a "dist" folder with the production build
 RUN npm run build
 
-# Expose the application port
-EXPOSE 3000
-
-# Define the command to run the application
-CMD ["npm", "run", "start:prod"]
+# Start the server using the production build
+CMD [ "node", "dist/src/main.js" ]
