@@ -68,5 +68,5 @@ Contributions are welcome! Please create a pull request with detailed changes.
 MIT License
 
 ## Contact
-For any inquiries, feel free to reach out at [your email/contact info].
+For any inquiries, feel free to reach out at phanducan147@gmail.com.
 
