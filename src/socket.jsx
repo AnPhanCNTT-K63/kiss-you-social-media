@@ -5,7 +5,7 @@ let socket;
 
 export const getSocket = () => {
   if (!socket) {
-    socket = io("ws://localhost:3002");
+    socket = io(process.env.REACT_APP_SOCKET_URL);
   }
   return socket;
 };

@@ -75,7 +75,7 @@ const NotificationDropdown = () => {
             {notifications.length > 0 ? (
               [...notifications].reverse().map((notification) => (
                 <Box
-                  key={notification.id}
+                  key={notification._id}
                   className={`${styles.notificationItem} ${
                     notification.isRead ? "" : styles.unread
                   }`}
