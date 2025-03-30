@@ -4,6 +4,10 @@ Kiss You is a social media platform built with the MERN stack, featuring real-ti
 
 ## Features
 
+![image](https://github.com/user-attachments/assets/1aa381c3-a392-4d10-a7e8-605032813927)
+
+
+
 ### User Features:
 - **Manage Personal Account**: Register, log in, edit profile, and delete account.
 - **Connect with Friends**: Search users, send friend requests, and manage friend list.
