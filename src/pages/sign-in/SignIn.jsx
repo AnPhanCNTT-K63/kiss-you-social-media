@@ -58,6 +58,7 @@ const SignIn = () => {
         }).then(() => {
           localStorage.setItem("token", res.data.accessToken);
           navigate("/");
+          window.location.reload();
         });
       } catch (error) {
         Swal.fire({

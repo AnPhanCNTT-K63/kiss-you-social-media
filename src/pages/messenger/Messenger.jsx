@@ -150,15 +150,36 @@ export default function Messenger() {
               <div className={styles.chatBoxBottom}>
                 <textarea
                   className={styles.chatMessageInput}
-                  placeholder="write something..."
+                  placeholder="Type a message..."
                   onChange={(e) => setNewMessage(e.target.value)}
                   value={newMessage}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSubmit(e);
+                    }
+                  }}
                 ></textarea>
                 <button
                   className={styles.chatSubmitButton}
                   onClick={handleSubmit}
+                  disabled={!newMessage.trim()}
                 >
-                  Send
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M22 2L11 13M22 2L15 22L11 13M11 13L2 9L22 2"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </button>
               </div>
             </>

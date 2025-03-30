@@ -3,7 +3,6 @@ import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import { UserProvider } from "./UserContext";
 import Navbar from "./components/navbar/Navbar";
 import Navigation from "./components/navigation/Navigation";
-import { Link } from "react-router-dom";
 
 function App() {
   return (
