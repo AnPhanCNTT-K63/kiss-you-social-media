@@ -18,14 +18,11 @@ import RegisterChart from "../statistics-graph/register-statistics/RegisterChart
 
 export default function Navigation() {
   const [showArrow, setShowArrow] = useState(false);
+  const isAuthenticated = !!localStorage.getItem("token"); // Convert to boolean
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > window.innerHeight / 2) {
-        setShowArrow(true);
-      } else {
-        setShowArrow(false);
-      }
+      setShowArrow(window.scrollY > window.innerHeight / 2);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -42,11 +39,8 @@ export default function Navigation() {
   return (
     <>
       <Routes>
-        {localStorage.getItem("token") ? (
-          <Route path="/" element={<Home />} />
-        ) : (
-          <Route path="/" element={<SignIn />} />
-        )}
+        {/* Use a separate route for authentication check */}
+        <Route path="/" element={isAuthenticated ? <Home /> : <SignIn />} />
 
         <Route path="/home" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
