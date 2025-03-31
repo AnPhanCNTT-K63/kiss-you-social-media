@@ -4,8 +4,6 @@ Kiss You is a social media platform built with the MERN stack, featuring real-ti
 
 ## Features
 
-### Swagger API Document: https://web-production-52e1.up.railway.app/document
-
 ### User Features:
 1. **Manage Personal Account**: Register, log in, edit profile, and delete account.
 2. **Connect with Friends**: Search users, send friend requests, and manage friend list.
