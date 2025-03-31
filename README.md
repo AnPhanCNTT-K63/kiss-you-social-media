@@ -53,6 +53,8 @@ Kiss You is a social media platform built with the MERN stack, featuring real-ti
 - **Backend**: NestJS
 - **Database**: MongoDB
 - **Real-time Communication**: Socket.io
+- **Storage**: AWS S3
+- **CDN**: AWS CloudFront
 - **Containerization**: Docker (Backend only)
 
 ## Project Structure
