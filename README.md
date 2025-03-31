@@ -72,7 +72,7 @@ Ensure you have the following installed:
 
 ### Clone the Repository
 ```sh
- git clone https://github.com/yourusername/kiss-you.git
+ git clone https://github.com/AnPhanCNTT-K63/kiss-you-social-media
  cd kiss-you
 ```
 
