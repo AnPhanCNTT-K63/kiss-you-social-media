@@ -56,7 +56,7 @@ Kiss You is a social media platform built with the MERN stack, featuring real-ti
 - **Real-time Communication**: Socket.io
 - **Storage**: AWS S3
 - **CDN**: AWS CloudFront
-- **Containerization**: Docker (Backend only)
+- **Containerization**: Docker
 
 ## Project Structure
 The project has two branches:
@@ -68,7 +68,7 @@ The project has two branches:
 ### Prerequisites
 Ensure you have the following installed:
 - Node.js
-- Docker (for backend)
+- Docker
 
 ### Clone the Repository
 ```sh
