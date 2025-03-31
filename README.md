@@ -1,4 +1,5 @@
 # Kiss You - Social Media Platform
+View production at: https://kiss-you-social-media.vercel.app/
 
 Kiss You is a social media platform built with the MERN stack, featuring real-time messaging, user interactions, and admin management. It leverages NestJS for the backend and ReactJS with Vite for the frontend, utilizing MongoDB as the database and Socket.io for real-time communication. The backend is containerized using Docker.
 
@@ -53,6 +54,8 @@ Kiss You is a social media platform built with the MERN stack, featuring real-ti
 - **Backend**: NestJS
 - **Database**: MongoDB
 - **Real-time Communication**: Socket.io
+- **Storage**: AWS S3
+- **CDN**: AWS CloudFront
 - **Containerization**: Docker (Backend only)
 
 ## Project Structure
@@ -69,7 +72,7 @@ Ensure you have the following installed:
 
 ### Clone the Repository
 ```sh
- git clone https://github.com/yourusername/kiss-you.git
+ git clone https://github.com/AnPhanCNTT-K63/kiss-you-social-media
  cd kiss-you
 ```
 
